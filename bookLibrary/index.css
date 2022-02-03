@@ -1,0 +1,168 @@
+:root {
+  --cOrange: #f47957;
+  --cLightOrange: #f3a255;
+  --cBrown: #463020;
+  --cModalBackground: #463020e7;
+  --cInputFieldColor: #f3a15521;
+  --cBeige: #f4f2e9;
+  --cDarkerBeige: #e0c8a6;
+  --mMargin: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat Alternates", sans-serif;
+  color: var(--cBrown);
+}
+body {
+  background-color: var(--cBeige);
+}
+/* Nav */
+nav {
+  margin: var(--mMargin);
+}
+.nav-title {
+  display: flex;
+  align-items: flex-end;
+
+  gap: var(--mMargin);
+}
+.books-icon {
+  font-size: 70px;
+  color: var(--cOrange);
+  color: var(--cBrown);
+}
+h1 {
+  font-size: 50px;
+}
+.btn-container {
+  display: flex;
+  gap: var(--mMargin);
+}
+.spacing-hidden {
+  width: 70px;
+  height: 1px;
+  visibility: hidden;
+}
+.add-new-book-btn {
+  margin: var(--mMargin) 0;
+  width: 200px;
+  height: 40px;
+  text-decoration: none;
+  box-shadow: none;
+  border-radius: 5px;
+  border: 2px solid var(--cOrange);
+  /* decide background */
+  background-color: var(--cLightOrange);
+  background-color: var(--cDarkerBeige);
+  font-weight: bold;
+  font-size: 18px;
+}
+.fa-book {
+  margin-right: 5px;
+}
+/* Book table */
+.books-section {
+  margin: var(--mMargin);
+}
+.books-section h2 {
+  margin: var(--mMargin) 0;
+}
+.book-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  /* border-style: hidden; */
+}
+
+.headings {
+  border: 3px solid var(--cBrown);
+  text-align: left;
+}
+
+.book-row {
+  border-left: 3px solid var(--cBrown);
+  border-right: 3px solid var(--cBrown);
+  border-bottom: 1px solid var(--cBrown);
+}
+.book-table:last-child {
+  border-bottom: 3px solid var(--cBrown);
+}
+/* .headings:first-child {
+  border-top-left-radius: 5px;
+} */
+.book-table th,
+.book-table td {
+  padding: var(--mMargin);
+}
+
+/* Modal add new book */
+.hideModal {
+  visibility: hidden;
+}
+.n-b-modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--cModalBackground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-new-book {
+  border: solid 7px var(--cBrown);
+  border-radius: 5px;
+  width: 80%;
+  height: fit-content;
+  background-color: var(--cBeige);
+}
+.close-modal {
+  color: var(--cOrange);
+  font-size: 30px;
+  display: block;
+  margin: 5px 5px 5px auto;
+  cursor: pointer;
+}
+.input-text {
+  border: none;
+  border-bottom: 2px solid var(--cBrown);
+  background-color: var(--cInputFieldColor);
+}
+.input-text:focus {
+  outline: 2px solid var(--cLightOrange);
+  border: none;
+}
+fieldset {
+  border: none;
+  margin: var(--mMargin);
+}
+.status-choice {
+  border: 2px solid var(--cBrown);
+  cursor: pointer;
+}
+
+.star-rating {
+  display: flex;
+}
+.star-rating div {
+  margin: 0 5px;
+}
+.star-rating div ion-icon {
+  color: var(--cBrown);
+  font-size: 20px;
+}
+.form-btn {
+  padding: 5px 15px;
+  border-radius: 5px;
+  box-shadow: none;
+  border: 2px solid var(--cBrown);
+  font-weight: bold;
+}
+.btn-save {
+  background-color: var(--cLightOrange);
+}
+.btn-reset {
+  background-color: var(--cDarkerBeige);
+}
