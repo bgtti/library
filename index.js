@@ -28,20 +28,31 @@ function Book(title, author,pages,status,rating){
 }
 
 let authorInput = document.querySelector('#author');
-let authorInput = document.querySelector('#title');
-let authorInput = document.querySelector('#pages');
-let authorInput = document.querySelector('#status');
-let authorInput = document.querySelector('#rating');
-let authorInput = document.querySelector('#author');
+let titleInput = document.querySelector('#title');
+let pagesInput = document.querySelector('#pages');
+let statusInput = document.querySelector('#status');
+let ratingInput = document.querySelector('#rating');
+let commentsInput = document.querySelector('#comments');
 
 function resetInputValues(){
 authorInput.value = "";
+titleInput.value = "";
+pagesInput.value = "";
+ratingInput.value = "";
+commentsInput.value = "";
+
+
+
 }
 function addBookToLibrary(){
- myLibrary.push(new Book(authorInput.value, ))
+ myLibrary.push(new Book(authorInput.value, titleInput.value, pagesInput.value, statusInput.value, ratingInput.value, commentsInput.value ))
  myLibrary.push(authorInput.value);
  console.log(myLibrary);
 resetInputValues();
+ 
+}
+
+function addNewBookToTable (){
  
 }
 
