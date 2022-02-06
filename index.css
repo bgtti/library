@@ -1,7 +1,4 @@
 :root {
-	--cOrange: #f47957;
-	--cLightOrange: #f3a255;
-	/* --cBrown: #8a4515; */
 	--cBrown: #463020;
 	--cModalBackground: #cbc2b9e0;
 	--cInputFieldColor: #dbd2c75e;
@@ -10,9 +7,6 @@
 	--cBeigeGreyish: #cbc2b9;
 	--cBeigeGreyishLight: #dbd2c7;
 	--cBeigeGreyishLightUltra: #e9dfd4;
-	/* --cBeige: #f4f2e9;
-	--cDarkerBeige: #e0c8a6; */
-	/* --cGreen: #7b9a53; */
 	--cOrangeish: #bb7d58;
 	--cOrangeEarthy: #d07338;
 	--cGreen: #989f76;
@@ -104,6 +98,7 @@ h1 em {
 .fa-book {
 	margin-right: 5px;
 }
+
 /* Book table */
 
 .book-table {
@@ -239,6 +234,21 @@ fieldset {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+}
+
+/* Form validation */
+.validation-issue {
+	font-style: italic;
+	font-size: 13px;
+	color: var(--cOrangeEarthy);
+}
+.hide-issue {
+	display: none;
+}
+.input-not-valid {
+	border: solid 2px var(--cRed);
+	background-color: var(--cRed);
+	font-weight: bold;
 }
 
 /* selected stars */

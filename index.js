@@ -61,6 +61,11 @@ let bookTable = document.querySelector('#bookTable')
 const editBookBtn = document.querySelector('#editBookBtn')
 const changeToEdit = document.querySelector('#changeToEdit') //this is the h2 em in 'add new book' modal.
 
+//form validation:
+const validationAuthor = document.querySelector('#validationAuthor')
+const validationTitle = document.querySelector('#validationTitle')
+const validationPages = document.querySelector('#validationPages')
+
 //****************GLOBAL VARIABLES****************
 //when the trash or edit icons are clicked, index of book saved to the variables by the showTable function
 let bookToDelete = undefined
@@ -70,13 +75,16 @@ let bookToEdit = undefined
 let trashIcons = undefined
 let editIcons = undefined
 
+//form validation
+let formIsValidated = true
+
 //****************BOOK LIBRARY****************
 //the array where book objects will be saved to
 let myLibrary = [sampleBook1, sampleBook2, sampleBook3]
 
 //****************CONSTRUCTOR ****************
 //of the book object:
-function Book(title, author, pages, status, rating) {
+function Book(title, author, pages, status, rating, comments) {
 	this.title = title
 	this.author = author
 	this.pages = pages
@@ -193,6 +201,7 @@ function resetInputValues() {
 	ratingInput.value = ''
 	commentsInput.value = ''
 	resetStars()
+	resetValidation()
 }
 
 //function that creates a new book object:
@@ -271,15 +280,12 @@ function showTable() {
 		trashIcons = document.querySelectorAll('.trashIcon')
 		editIcons = document.querySelectorAll('.editIcon')
 
-		console.log(trashIcons) // *****************************************************REMOVE
-
 		trashIcons.forEach((e, i) => {
 			e.addEventListener(
 				'click',
 				() => {
 					openModalF(deleteModalContainer)
 					bookToDelete = i
-					console.log(bookToDelete) //// **************************************REMOVE
 				},
 				false
 			)
@@ -290,7 +296,6 @@ function showTable() {
 				() => {
 					bookToEdit = i
 					openEditBook()
-					console.log(bookToEdit) //// **************************************REMOVE
 				},
 				false
 			)
@@ -300,15 +305,99 @@ function showTable() {
 showTable()
 
 //****************SAVE NEW BOOK****************
+//form validation:
+
+function resetValidation() {
+	formIsValidated = true
+	validationAuthor.classList.add('hide-issue')
+	authorInput.classList.remove('input-not-valid')
+	validationTitle.classList.add('hide-issue')
+	titleInput.classList.remove('input-not-valid')
+	validationPages.classList.add('hide-issue')
+	pagesInput.classList.remove('input-not-valid')
+}
+function validateAuthor() {
+	if (authorInput.value === '') {
+		formIsValidated = false
+		validationAuthor.classList.remove('hide-issue')
+		authorInput.classList.add('input-not-valid')
+	} else {
+		formIsValidated = true
+		validationAuthor.classList.add('hide-issue')
+		authorInput.classList.remove('input-not-valid')
+	}
+}
+
+function validateTitle() {
+	if (titleInput.value === '') {
+		formIsValidated = false
+		validationTitle.classList.remove('hide-issue')
+		titleInput.classList.add('input-not-valid')
+	} else {
+		formIsValidated = true
+		validationTitle.classList.add('hide-issue')
+		titleInput.classList.remove('input-not-valid')
+	}
+}
+
+function validatePages() {
+	if (pagesInput.value.length > 5) {
+		formIsValidated = false
+		validationPages.classList.remove('hide-issue')
+		pagesInput.classList.add('input-not-valid')
+	} else {
+		formIsValidated = true
+		validationPages.classList.add('hide-issue')
+		pagesInput.classList.remove('input-not-valid')
+	}
+}
+
+function validateForm() {
+	if (authorInput.value === '') {
+		validateAuthor()
+	} else if (titleInput.value === '') {
+		validateTitle()
+	} else if (pagesInput.value.length > 5) {
+		validatePages()
+	} else {
+		resetValidation()
+	}
+}
+
+authorInput.addEventListener(
+	'blur',
+	() => {
+		validateAuthor()
+	},
+	false
+)
+titleInput.addEventListener(
+	'blur',
+	() => {
+		validateTitle()
+	},
+	false
+)
+pagesInput.addEventListener(
+	'blur',
+	() => {
+		validatePages()
+	},
+	false
+)
+
 //Event listener to the 'save book' button in 'Add new book' Modal:
 //it will call the function to create a new book object (addBookToLibrary) and close the modal.
 
 saveBookBtn.addEventListener(
 	'click',
 	() => {
-		addBookToLibrary()
-		closeModalF(modalContainer)
-		console.log(myLibrary)
+		validateForm()
+		if (formIsValidated) {
+			addBookToLibrary()
+			closeModalF(modalContainer)
+			resetValidation()
+		}
 	},
 	false
 )
@@ -349,7 +438,33 @@ function openEditBook() {
 	ratingInput.value = myLibrary[bookToEdit].rating
 	commentsInput.value = myLibrary[bookToEdit].comments
 
+	//show the coloured stars according to the number rating:
 	showStars(myLibrary[bookToEdit].rating)
-
+	//opening the modal when everything is set:
 	openModalF(modalContainer)
 }
+
+function editBook() {
+	myLibrary[bookToEdit].author = authorInput.value
+	myLibrary[bookToEdit].title = titleInput.value
+	myLibrary[bookToEdit].pages = pagesInput.value
+	myLibrary[bookToEdit].status = statusInput.value
+	myLibrary[bookToEdit].rating = ratingInput.value
+	myLibrary[bookToEdit].comments = commentsInput.value
+	showTable()
+	resetInputValues()
+	bookToEdit = undefined
+}
+
+editBookBtn.addEventListener(
+	'click',
+	() => {
+		validateForm()
+		if (formIsValidated) {
+			editBook()
+			closeModalF(modalContainer)
+			resetValidation()
+		}
+	},
+	false
+)

@@ -45,23 +45,7 @@
                 <th>Rating</th>
                 <th>Action</th>
             </tr>
-            <!-- <tr class="book-row">
-					<td>The Black Swan</td>
-					<td>Taleb</td>
-					<td>250</td>
-					<td>Read</td>
-					<td>
-						<ion-icon class="ministarIcon" name="star-outline"></ion-icon>
-						<ion-icon class="ministarIcon" name="star-outline"></ion-icon>
-						<ion-icon class="ministarIcon" name="star-outline"></ion-icon>
-						<ion-icon class="ministarIcon" name="star-outline"></ion-icon>
-						<ion-icon class="ministarIcon" name="star-outline"></ion-icon>
-					</td>
-					<td>
-						<ion-icon name="create-outline" class="editIcon"></ion-icon>
-						<ion-icon name="trash-outline" class="trashIcon"></ion-icon>
-					</td>
-				</tr> -->
+
         </table>
     </section>
 
@@ -69,7 +53,7 @@
     <div class="n-b-modal-container hideModal" id="modalContainer">
         <div class="add-new-book">
             <div class="top-of-container">
-                <h2><em id="changeToEdit">Add</em> new book</h2>
+                <h2><em id="changeToEdit">Add</em> book</h2>
                 <ion-icon name="close-circle-outline" class="close-modal" id="closeModal"></ion-icon>
             </div>
 
@@ -77,15 +61,18 @@
                 <fieldset>
                     <label for="author">Author*:</label>
                     <input type="text" id="author" name="author" required minlength="1" maxlength="40"
-                        class="input-text" />
+                        class="input-text " />
+                    <p class="validation-issue hide-issue" id="validationAuthor">Author is a required input!</p>
                 </fieldset>
                 <fieldset>
                     <label for="title">Title*:</label>
                     <input type="text" name="title" id="title" class="input-text" minlength="1" maxlength="55" />
+                    <p class="validation-issue hide-issue" id="validationTitle">Title is a required input!</p>
                 </fieldset>
                 <fieldset>
                     <label for="pages">Number of pages:</label>
                     <input type="NUMBER" name="Pages" id="pages" maxlength="4" class="input-text" />
+                    <p class="validation-issue hide-issue" id="validationPages">Maximum of 5 numbers allowed!</p>
                 </fieldset>
                 <fieldset class="try-this">
                     <label for="status">Status*:</label>
@@ -122,8 +109,7 @@
 
                 <fieldset>
                     <textarea name="Comments" class="user-comment" id="comments" cols="30" rows="10"
-                        placeholder="Comments" maxlength="500">
-						</textarea>
+                        placeholder="Comments" maxlength="500"></textarea>
                 </fieldset>
                 <fieldset class="btn-containers-in-modal">
                     <button type="button" class="form-btn btn-save" id="saveBookBtn">
