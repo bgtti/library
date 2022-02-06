@@ -1,12 +1,21 @@
 :root {
 	--cOrange: #f47957;
 	--cLightOrange: #f3a255;
+	/* --cBrown: #8a4515; */
 	--cBrown: #463020;
-	--cModalBackground: #463020e7;
-	--cInputFieldColor: #f3a15521;
+	--cModalBackground: #cbc2b9e0;
+	--cInputFieldColor: #dbd2c75e;
 	--cBeige: #f4f2e9;
 	--cDarkerBeige: #e0c8a6;
-	--cGreen: #7b9a53;
+	--cBeigeGreyish: #cbc2b9;
+	--cBeigeGreyishLight: #dbd2c7;
+	--cBeigeGreyishLightUltra: #e9dfd4;
+	/* --cBeige: #f4f2e9;
+	--cDarkerBeige: #e0c8a6; */
+	/* --cGreen: #7b9a53; */
+	--cOrangeish: #bb7d58;
+	--cOrangeEarthy: #d07338;
+	--cGreen: #989f76;
 	--cRed: #984b42b2;
 	--mMargin: 10px;
 }
@@ -17,8 +26,16 @@
 	font-family: 'Montserrat Alternates', sans-serif;
 	color: var(--cBrown);
 }
+html {
+	height: 100%;
+}
 body {
-	background-color: var(--cBeige);
+	background-color: var(--cBeigeGreyish);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	height: 100%;
 }
 /* Nav */
 nav {
@@ -26,55 +43,73 @@ nav {
 }
 .nav-title {
 	display: flex;
-	align-items: flex-end;
-
+	align-items: center;
 	gap: var(--mMargin);
 }
-.books-icon {
-	font-size: 70px;
-	color: var(--cOrange);
+#books-icon {
+	font-size: 50px;
+
 	color: var(--cBrown);
 }
+
 h1 {
-	font-size: 50px;
+	font-size: 30px;
+	font-weight: 500;
+	color: var(--cOrangeish);
 }
+h1 em {
+	font-style: normal;
+	font-weight: 700;
+	color: var(--cBrown);
+}
+@media only screen and (min-width: 600px) {
+	h1 {
+		font-size: 50px;
+	}
+	.books-icon {
+		font-size: 70px;
+	}
+}
+
+/* BOOK TABLE */
+/* 'Book List' and 'add new book' btn */
+.books-section {
+	margin: var(--mMargin);
+	height: 80%;
+}
+
 .btn-container {
 	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
 	gap: var(--mMargin);
 }
-.spacing-hidden {
-	width: 70px;
-	height: 1px;
-	visibility: hidden;
+
+.books-section h2 {
+	margin: var(--mMargin) 0;
 }
+
 .add-new-book-btn {
 	margin: var(--mMargin) 0;
-	width: 200px;
-	height: 40px;
+	width: 155px;
+	height: 35px;
 	text-decoration: none;
 	box-shadow: none;
 	border-radius: 5px;
-	border: 2px solid var(--cOrange);
-	/* decide background */
-	background-color: var(--cLightOrange);
-	background-color: var(--cDarkerBeige);
+	border: 2px solid var(--cBrown);
+	background-color: var(--cGreen);
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 15px;
 }
 .fa-book {
 	margin-right: 5px;
 }
 /* Book table */
-.books-section {
-	margin: var(--mMargin);
-}
-.books-section h2 {
-	margin: var(--mMargin) 0;
-}
+
 .book-table {
 	border-collapse: collapse;
 	border-spacing: 0;
-	/* border-style: hidden; */
+	background-color: var(--cBeigeGreyishLight);
 }
 
 .headings {
@@ -90,20 +125,25 @@ h1 {
 .book-table:last-child {
 	border-bottom: 3px solid var(--cBrown);
 }
-/* .headings:first-child {
-  border-top-left-radius: 5px;
-} */
+
 .book-table th,
 .book-table td {
 	padding: var(--mMargin);
 }
 
-/* Modal add new book */
+@media only screen and (max-width: 600px) {
+	.book-table th,
+	.book-table td {
+		font-size: 10px;
+	}
+}
+/* MODAL: add new book */
 .hideModal {
 	visibility: hidden;
 }
 .n-b-modal-container {
 	position: absolute;
+	z-index: 1;
 	top: 0;
 	left: 0;
 	height: 100%;
@@ -116,12 +156,13 @@ h1 {
 .add-new-book {
 	border: solid 7px var(--cBrown);
 	border-radius: 5px;
-	width: 80%;
+	width: fit-content;
 	height: fit-content;
-	background-color: var(--cBeige);
+	background-color: var(--cBeigeGreyishLightUltra);
 }
+
 .close-modal {
-	color: var(--cOrange);
+	color: var(--cOrangeish);
 	font-size: 30px;
 	display: block;
 	margin: 5px 5px 5px auto;
@@ -133,7 +174,7 @@ h1 {
 	background-color: var(--cInputFieldColor);
 }
 .input-text:focus {
-	outline: 2px solid var(--cLightOrange);
+	outline: 2px solid var(--cOrangeEarthy);
 	border: none;
 }
 fieldset {
@@ -144,6 +185,7 @@ fieldset {
 	border: 2px solid var(--cBrown);
 	cursor: pointer;
 }
+
 .star-rating-container {
 	display: flex;
 }
@@ -169,15 +211,23 @@ fieldset {
 	cursor: pointer;
 }
 .btn-save {
-	background-color: var(--cLightOrange);
+	background-color: var(--cGreen);
 }
 .btn-reset {
-	background-color: var(--cDarkerBeige);
+	background-color: var(--cBeigeGreyish);
+}
+.user-comment {
+	width: 100%;
+}
+.btn-containers-in-modal {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 }
 
 /* selected stars */
 .selectedStar .starIcon {
-	color: var(--cLightOrange);
+	color: var(--cOrangeEarthy);
 }
 
 /* mini stars (stars inside table) */
@@ -191,14 +241,15 @@ fieldset {
 .modal-delete-book {
 	border: solid 7px var(--cBrown);
 	border-radius: 5px;
-	width: 80%;
+	width: fit-content;
 	height: fit-content;
-	background-color: var(--cBeige);
+	background-color: var(--cModalBackground);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
+
 .modal-delete-book h3,
 .modal-delete-book button {
 	margin: var(--mMargin);
@@ -213,6 +264,9 @@ fieldset {
 .delete-btn {
 	background-color: var(--cRed);
 }
+.btn-container-modal-delete-book {
+	margin-bottom: 25px;
+}
 
 .trashIcon,
 .editIcon {
@@ -221,7 +275,6 @@ fieldset {
 
 /* Footer */
 footer {
-	flex: 100 100 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -230,11 +283,9 @@ footer {
 }
 footer p {
 	margin-right: 7px;
-	color: #808080;
+	color: var(--cBrown);
 }
-footer img {
-	width: 20px;
+footer ion-icon {
+	font-size: 20px;
 	padding-left: 5px;
-	filter: invert(53%) sepia(10%) saturate(9%) hue-rotate(31deg) brightness(93%)
-		contrast(88%);
 }
