@@ -141,6 +141,19 @@ h1 em {
 .hideModal {
 	visibility: hidden;
 }
+.top-of-container {
+	display: flex;
+	align-items: center;
+	margin-left: var(--mMargin);
+}
+.top-of-container h2 {
+	font-weight: 500;
+	color: var(--cOrangeish);
+}
+.top-of-container h2 em {
+	font-style: normal;
+	font-weight: 700;
+}
 .n-b-modal-container {
 	position: absolute;
 	z-index: 1;
@@ -215,6 +228,9 @@ fieldset {
 }
 .btn-reset {
 	background-color: var(--cBeigeGreyish);
+}
+.btn-edit {
+	display: none;
 }
 .user-comment {
 	width: 100%;

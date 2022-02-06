@@ -1,58 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="index.css" />
-		<!-- Font Awesome -->
-		<script
-			src="https://kit.fontawesome.com/0f7ca667d7.js"
-			crossorigin="anonymous"
-		></script>
-		<!-- Google Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-			rel="stylesheet"
-		/>
-		<title>Book Library</title>
-	</head>
 
-	<body>
-		<!-- Nav -->
-		<nav>
-			<div class="nav-title">
-				<ion-icon
-					name="library-outline"
-					class="books-icon"
-					id="books-icon"
-				></ion-icon>
-				<h1><em>Book</em> Library App</h1>
-			</div>
-		</nav>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/0f7ca667d7.js" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet" />
+    <title>Book Library</title>
+</head>
 
-		<!-- Book List -->
-		<section class="books-section">
-			<div class="btn-container">
-				<h2>Book List</h2>
+<body>
+    <!-- Nav -->
+    <nav>
+        <div class="nav-title">
+            <ion-icon name="library-outline" class="books-icon" id="books-icon"></ion-icon>
+            <h1><em>Book</em> Library App</h1>
+        </div>
+    </nav>
 
-				<button class="add-new-book-btn" id="addBookBtn">
-					<i class="fas fa-book"></i> Add new book
-				</button>
-			</div>
+    <!-- Book List -->
+    <section class="books-section">
+        <div class="btn-container">
+            <h2>Book List</h2>
 
-			<table class="book-table" id="bookTable">
-				<tr class="headings">
-					<th>Title</th>
-					<th>Author</th>
-					<th>Pages</th>
-					<th>Status</th>
-					<th>Rating</th>
-					<th>Action</th>
-				</tr>
-				<!-- <tr class="book-row">
+            <button class="add-new-book-btn" id="addBookBtn">
+                <i class="fas fa-book"></i> Add new book
+            </button>
+        </div>
+
+        <table class="book-table" id="bookTable">
+            <tr class="headings">
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Status</th>
+                <th>Rating</th>
+                <th>Action</th>
+            </tr>
+            <!-- <tr class="book-row">
 					<td>The Black Swan</td>
 					<td>Taleb</td>
 					<td>250</td>
@@ -69,141 +62,109 @@
 						<ion-icon name="trash-outline" class="trashIcon"></ion-icon>
 					</td>
 				</tr> -->
-			</table>
-		</section>
+        </table>
+    </section>
 
-		<!-- MODAL: Add new book -->
-		<div class="n-b-modal-container hideModal" id="modalContainer">
-			<div class="add-new-book">
-				<ion-icon
-					name="close-circle-outline"
-					class="close-modal"
-					id="closeModal"
-				></ion-icon>
-				<form action="#" method="">
-					<fieldset>
-						<label for="author">Author*:</label>
-						<input
-							type="text"
-							id="author"
-							name="author"
-							required
-							minlength="1"
-							maxlength="40"
-							class="input-text"
-						/>
-					</fieldset>
-					<fieldset>
-						<label for="title">Title*:</label>
-						<input
-							type="text"
-							name="title"
-							id="title"
-							class="input-text"
-							minlength="1"
-							maxlength="55"
-						/>
-					</fieldset>
-					<fieldset>
-						<label for="pages">Number of pages:</label>
-						<input
-							type="NUMBER"
-							name="Pages"
-							id="pages"
-							maxlength="4"
-							class="input-text"
-						/>
-					</fieldset>
-					<fieldset class="try-this">
-						<label for="status">Status*:</label>
-						<select name="status" id="status" class="status-choice">
-							<option value="Read" selected>Read</option>
-							<option value="Reading">Reading</option>
-							<option value="Unread">Unread</option>
-							<option value="Wishlist">Wishlist</option>
-						</select>
-					</fieldset>
+    <!-- MODAL: Add new book -->
+    <div class="n-b-modal-container hideModal" id="modalContainer">
+        <div class="add-new-book">
+            <div class="top-of-container">
+                <h2><em id="changeToEdit">Add</em> new book</h2>
+                <ion-icon name="close-circle-outline" class="close-modal" id="closeModal"></ion-icon>
+            </div>
 
-					<fieldset class="star-rating-container">
-						<label for="rating">Rating:</label>
-						<input type="hidden" id="rating" name="rating" value="" />
+            <form action="#" method="">
+                <fieldset>
+                    <label for="author">Author*:</label>
+                    <input type="text" id="author" name="author" required minlength="1" maxlength="40"
+                        class="input-text" />
+                </fieldset>
+                <fieldset>
+                    <label for="title">Title*:</label>
+                    <input type="text" name="title" id="title" class="input-text" minlength="1" maxlength="55" />
+                </fieldset>
+                <fieldset>
+                    <label for="pages">Number of pages:</label>
+                    <input type="NUMBER" name="Pages" id="pages" maxlength="4" class="input-text" />
+                </fieldset>
+                <fieldset class="try-this">
+                    <label for="status">Status*:</label>
+                    <select name="status" id="status" class="status-choice">
+                        <option value="Read" selected>Read</option>
+                        <option value="Reading">Reading</option>
+                        <option value="Unread">Unread</option>
+                        <option value="Wishlist">Wishlist</option>
+                    </select>
+                </fieldset>
 
-						<div class="the-stars">
-							<div data-rating="1" class="theStars">
-								<ion-icon class="starIcon" name="star-outline"></ion-icon>
-							</div>
-							<div data-rating="2" class="theStars">
-								<ion-icon class="starIcon" name="star-outline"></ion-icon>
-							</div>
-							<div data-rating="3" class="theStars">
-								<ion-icon class="starIcon" name="star-outline"></ion-icon>
-							</div>
-							<div data-rating="4" class="theStars">
-								<ion-icon class="starIcon" name="star-outline"></ion-icon>
-							</div>
-							<div data-rating="5" class="theStars">
-								<ion-icon class="starIcon" name="star-outline"></ion-icon>
-							</div>
-						</div>
-					</fieldset>
+                <fieldset class="star-rating-container">
+                    <label for="rating">Rating:</label>
+                    <input type="hidden" id="rating" name="rating" value="" />
 
-					<fieldset>
-						<textarea
-							name="Comments"
-							class="user-comment"
-							id="comments"
-							cols="30"
-							rows="10"
-							placeholder="Comments"
-							maxlength="500"
-						></textarea>
-					</fieldset>
-					<fieldset class="btn-containers-in-modal">
-						<button type="button" class="form-btn btn-save" id="saveBookBtn">
-							Save book
-						</button>
-						<button type="reset" class="form-btn btn-reset" id="resetBtn">
-							Reset input
-						</button>
-					</fieldset>
-				</form>
-			</div>
-		</div>
+                    <div class="the-stars">
+                        <div data-rating="1" class="theStars">
+                            <ion-icon class="starIcon" name="star-outline"></ion-icon>
+                        </div>
+                        <div data-rating="2" class="theStars">
+                            <ion-icon class="starIcon" name="star-outline"></ion-icon>
+                        </div>
+                        <div data-rating="3" class="theStars">
+                            <ion-icon class="starIcon" name="star-outline"></ion-icon>
+                        </div>
+                        <div data-rating="4" class="theStars">
+                            <ion-icon class="starIcon" name="star-outline"></ion-icon>
+                        </div>
+                        <div data-rating="5" class="theStars">
+                            <ion-icon class="starIcon" name="star-outline"></ion-icon>
+                        </div>
+                    </div>
+                </fieldset>
 
-		<!-- MODAL: delete book -->
-		<div class="n-b-modal-container hideModal" id="deleteModalContainer">
-			<div class="modal-delete-book">
-				<ion-icon
-					name="close-circle-outline"
-					class="close-modal"
-					id="closeDeleteModal"
-				></ion-icon>
-				<h3>Are you sure you would like to delete this book?</h3>
-				<div class="btn-container-modal-delete-book">
-					<button class="form-btn delete-btn" id="deleteBtn">
-						Delete book
-					</button>
-					<button class="form-btn keep-btn" id="keepBookBtn">Keep book</button>
-				</div>
-			</div>
-		</div>
-		<footer>
-			<p>2022</p>
-			<p>by</p>
-			<a href="https://github.com/bgtti/">
-				<ion-icon name="logo-github"></ion-icon>
-			</a>
-		</footer>
+                <fieldset>
+                    <textarea name="Comments" class="user-comment" id="comments" cols="30" rows="10"
+                        placeholder="Comments" maxlength="500">
+						</textarea>
+                </fieldset>
+                <fieldset class="btn-containers-in-modal">
+                    <button type="button" class="form-btn btn-save" id="saveBookBtn">
+                        Save book
+                    </button>
+                    <button type="button" class="form-btn btn-save btn-edit" id="editBookBtn">
+                        Edit book
+                    </button>
+                    <button type="reset" class="form-btn btn-reset" id="resetBtn">
+                        Reset input
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 
-		<script
-			type="module"
-			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-		></script>
-		<script
-			nomodule
-			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-		></script>
+    <!-- MODAL: delete book -->
+    <div class="n-b-modal-container hideModal" id="deleteModalContainer">
+        <div class="modal-delete-book">
+            <ion-icon name="close-circle-outline" class="close-modal" id="closeDeleteModal"></ion-icon>
+            <h3>Are you sure you would like to delete this book?</h3>
+            <div class="btn-container-modal-delete-book">
+                <button class="form-btn delete-btn" id="deleteBtn">
+                    Delete book
+                </button>
+                <button class="form-btn keep-btn" id="keepBookBtn">Keep book</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>2022</p>
+        <p>by</p>
+        <a href="https://github.com/bgtti/">
+            <ion-icon name="logo-github"></ion-icon>
+        </a>
+    </footer>
 
-		<script src="index.js"></script>
-	</body>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script src="index.js"></script>
+</body>
+
 </html>

@@ -1,57 +1,4 @@
-//OPEN AND CLOSE MODALS
-function closeModalF(modalToClose) {
-	modalToClose.classList.add('hideModal')
-}
-function openModalF(modalToOpen) {
-	modalToOpen.classList.remove('hideModal')
-}
-
-// Open/Close 'Add new book' Modal
-const closeModal = document.querySelector('#closeModal')
-const modalContainer = document.querySelector('#modalContainer')
-const addBookBtn = document.querySelector('#addBookBtn')
-
-closeModal.addEventListener(
-	'click',
-	() => {
-		closeModalF(modalContainer)
-	},
-	false
-)
-addBookBtn.addEventListener(
-	'click',
-	() => {
-		openModalF(modalContainer)
-	},
-	false
-)
-//Closing 'delete book' modal
-//(the opening of the modal by clicking the trash icon is done from the showTable function)
-const closeDeleteModal = document.querySelector('#closeDeleteModal')
-const deleteModalContainer = document.querySelector('#deleteModalContainer')
-const keepBookBtn = document.querySelector('#keepBookBtn')
-
-let bookToDelete = undefined //when the trash can clicked, index saved to this variable
-
-closeDeleteModal.addEventListener(
-	'click',
-	() => {
-		closeModalF(deleteModalContainer)
-		bookToDelete = undefined
-	},
-	false
-)
-keepBookBtn.addEventListener(
-	'click',
-	() => {
-		closeModalF(deleteModalContainer)
-		bookToDelete = undefined
-	},
-	false
-)
-
-//SAMPLE BOOKS
-
+//****************SAMPLE BOOKS****************
 const sampleBook1 = {
 	title: 'The Black Swan',
 	author: 'N. N. Taleb',
@@ -78,10 +25,57 @@ const sampleBook3 = {
 	comments: 'A massive but great book!',
 }
 
-//BOOK LIBRARY: the array where book objects will be saved to
+//****************SELECTORS****************
+//add book modal:
+const closeModal = document.querySelector('#closeModal')
+const modalContainer = document.querySelector('#modalContainer')
+const addBookBtn = document.querySelector('#addBookBtn')
+
+//selection of inputs from 'Add new book' Modal:
+const authorInput = document.querySelector('#author')
+const titleInput = document.querySelector('#title')
+const pagesInput = document.querySelector('#pages')
+const statusInput = document.querySelector('#status')
+const ratingInput = document.querySelector('#rating')
+const theStars = document.querySelectorAll('.theStars')
+const commentsInput = document.querySelector('#comments')
+
+//save book button
+const saveBookBtn = document.querySelector('#saveBookBtn')
+
+//reset changes button
+const resetBtn = document.querySelector('#resetBtn')
+
+//delete book modal:
+const closeDeleteModal = document.querySelector('#closeDeleteModal')
+const deleteModalContainer = document.querySelector('#deleteModalContainer')
+const keepBookBtn = document.querySelector('#keepBookBtn')
+
+//delete book button
+const deleteBtn = document.querySelector('#deleteBtn')
+
+//book table:
+let bookTable = document.querySelector('#bookTable')
+
+//Edit book:
+const editBookBtn = document.querySelector('#editBookBtn')
+const changeToEdit = document.querySelector('#changeToEdit') //this is the h2 em in 'add new book' modal.
+
+//****************GLOBAL VARIABLES****************
+//when the trash or edit icons are clicked, index of book saved to the variables by the showTable function
+let bookToDelete = undefined
+let bookToEdit = undefined
+
+//the trash and edit icon selectors are set in showTable function
+let trashIcons = undefined
+let editIcons = undefined
+
+//****************BOOK LIBRARY****************
+//the array where book objects will be saved to
 let myLibrary = [sampleBook1, sampleBook2, sampleBook3]
 
-//CONSTRUCTOR of the book object:
+//****************CONSTRUCTOR ****************
+//of the book object:
 function Book(title, author, pages, status, rating) {
 	this.title = title
 	this.author = author
@@ -91,40 +85,89 @@ function Book(title, author, pages, status, rating) {
 	this.comments = comments
 }
 
-//ADD NEW BOOK MODAL
-//Selection of inputs from 'Add new book' Modal:
-const authorInput = document.querySelector('#author')
-const titleInput = document.querySelector('#title')
-const pagesInput = document.querySelector('#pages')
-const statusInput = document.querySelector('#status')
-const ratingInput = document.querySelector('#rating')
-const theStars = document.querySelectorAll('.theStars')
-const commentsInput = document.querySelector('#comments')
+//****************OPEN AND CLOSE MODALS****************
+//closes modal
+function closeModalF(modalToClose) {
+	modalToClose.classList.add('hideModal')
 
-//The star rating: sets a rating value to ratingInput (in 'Add new book' Modal)
+	if (modalToClose === modalContainer) {
+		//if the modal is the 'add book' modal
+		//this resets the modal from 'edit' to 'add' modus
+		changeToEdit.textContent = 'Add'
+		editBookBtn.classList.add('btn-edit')
+		saveBookBtn.classList.remove('btn-edit')
+		resetBtn.classList.remove('btn-edit')
+
+		resetInputValues()
+	}
+}
+//opens modal
+function openModalF(modalToOpen) {
+	modalToOpen.classList.remove('hideModal')
+}
+
+// Event Listener: open/close 'Add new book' Modal
+
+closeModal.addEventListener(
+	'click',
+	() => {
+		closeModalF(modalContainer)
+	},
+	false
+)
+addBookBtn.addEventListener(
+	'click',
+	() => {
+		openModalF(modalContainer)
+	},
+	false
+)
+
+// Event Listener: open/close 'delete book' Modal
+//(the opening of the modal by clicking the trash icon is done from the showTable function)
+closeDeleteModal.addEventListener(
+	'click',
+	() => {
+		closeModalF(deleteModalContainer)
+		bookToDelete = undefined
+	},
+	false
+)
+keepBookBtn.addEventListener(
+	'click',
+	() => {
+		closeModalF(deleteModalContainer)
+		bookToDelete = undefined
+	},
+	false
+)
+
+//****************ADD NEW BOOK MODAL****************
+function showStars(ratingValue) {
+	theStars.forEach((star) => {
+		if (star.dataset.rating <= ratingValue) {
+			star.classList.add('selectedStar')
+			star.children[0].removeAttribute('name', 'star-outline')
+			star.children[0].setAttribute('name', 'star')
+		} else {
+			star.classList.remove('selectedStar')
+			star.children[0].removeAttribute('name', 'star')
+			star.children[0].setAttribute('name', 'star-outline')
+		}
+	})
+}
 for (let star of theStars) {
 	star.addEventListener(
 		'click',
 		() => {
 			ratingInput.value = star.dataset.rating
-
-			theStars.forEach((star) => {
-				if (star.dataset.rating <= ratingInput.value) {
-					star.classList.add('selectedStar')
-					star.children[0].removeAttribute('name', 'star-outline')
-					star.children[0].setAttribute('name', 'star')
-				} else {
-					star.classList.remove('selectedStar')
-					star.children[0].removeAttribute('name', 'star')
-					star.children[0].setAttribute('name', 'star-outline')
-				}
-			})
+			showStars(ratingInput.value)
 		},
 		false
 	)
 }
+
 //Reset button in 'Add new book' modal: resetting the stars
-const resetBtn = document.querySelector('#resetBtn')
 
 function resetStars() {
 	for (let star of theStars) {
@@ -168,13 +211,7 @@ function addBookToLibrary() {
 	resetInputValues()
 }
 
-//BOOK LIST
-//selectors:
-let trashIcons = undefined
-let editIcons = undefined
-
-let bookTable = document.querySelector('#bookTable')
-
+//****************CREATING TABLE ROWS****************
 //function that adds newly created book to 'Book List': to be viewed by user
 function showTable() {
 	while (bookTable.children.length > 1) {
@@ -247,27 +284,38 @@ function showTable() {
 				false
 			)
 		})
+		editIcons.forEach((e, i) => {
+			e.addEventListener(
+				'click',
+				() => {
+					bookToEdit = i
+					openEditBook()
+					console.log(bookToEdit) //// **************************************REMOVE
+				},
+				false
+			)
+		})
 	}
 }
 showTable()
 
-//SAVE NEW BOOK
+//****************SAVE NEW BOOK****************
 //Event listener to the 'save book' button in 'Add new book' Modal:
 //it will call the function to create a new book object (addBookToLibrary) and close the modal.
-const saveBookBtn = document.querySelector('#saveBookBtn')
 
 saveBookBtn.addEventListener(
 	'click',
 	() => {
 		addBookToLibrary()
 		closeModalF(modalContainer)
+		console.log(myLibrary)
 	},
 	false
 )
 
+//****************DELETE BOOK****************
 //DELETE BOOK MODAL: the delete button
 //deleting book from list
-const deleteBtn = document.querySelector('#deleteBtn')
 
 function deleteBook() {
 	myLibrary.splice(bookToDelete, 1)
@@ -283,3 +331,25 @@ deleteBtn.addEventListener(
 	},
 	false
 )
+
+//****************EDITING A BOOK****************
+
+function openEditBook() {
+	//the function uses the add book modal. It replaces the h2 wording from 'add' to 'edit', hides the original buttons, and displays the 'edit button'
+	changeToEdit.textContent = 'Edit'
+	saveBookBtn.classList.add('btn-edit')
+	resetBtn.classList.add('btn-edit')
+	editBookBtn.classList.remove('btn-edit')
+
+	//the values are pulled from the library using the bookToEdit global variable, set by the showTable function
+	authorInput.value = myLibrary[bookToEdit].author
+	titleInput.value = myLibrary[bookToEdit].title
+	pagesInput.value = myLibrary[bookToEdit].pages
+	statusInput.value = myLibrary[bookToEdit].status
+	ratingInput.value = myLibrary[bookToEdit].rating
+	commentsInput.value = myLibrary[bookToEdit].comments
+
+	showStars(myLibrary[bookToEdit].rating)
+
+	openModalF(modalContainer)
+}
